@@ -1,27 +1,21 @@
-.category-mapping {
-  display: flex;
-}
-
 .category {
+  width: 200px;
+  height: 300px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin: 16px;
-  cursor: pointer;
-  border: 2px solid #3c7c98;
-  padding: 10px;
+  flex-direction: column;
+  border: 3px solid #3c7c98;
   border-radius: 20px;
 }
 
-.category img {
-  width: 70px;
-  height: 70px;
+.category-image {
+  width: 150px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 8px;
 }
 
-.category-name {
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
+.carousel-container {
+  max-width: 1024px;
+  width: 100%;
 }

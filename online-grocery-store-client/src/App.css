@@ -5,6 +5,5 @@
   background-color: #ffffff;
   max-width: 1240px;
   position: relative;
-
-  overflow-x: hidden;
+  overflow: hidden;
 }
