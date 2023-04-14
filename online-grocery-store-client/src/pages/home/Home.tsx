@@ -1,12 +1,12 @@
 import Category from "../../components/category/Category";
-import Search from "../../components/search/Search";
+import ImageSlider from "../../components/imageSlider/ImageSlider";
 import "./Home.css";
 
 const Home = () => {
   return (
     <div className="home">
-      <Search />
       <Category />
+      <ImageSlider />
     </div>
   );
 };

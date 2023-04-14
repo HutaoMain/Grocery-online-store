@@ -1,0 +1,11 @@
+.category-page {
+  margin-bottom: 10%;
+}
+
+.category-list-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+
+  justify-content: center;
+}

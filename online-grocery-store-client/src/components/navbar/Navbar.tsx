@@ -1,28 +1,49 @@
 import "./Navbar.css";
+import { Link, useLocation } from "react-router-dom";
 import { AiFillHome, AiOutlineShoppingCart } from "react-icons/ai";
 import { FaProductHunt } from "react-icons/fa";
 import { TbJewishStarFilled } from "react-icons/tb";
 
 const Navbar = () => {
+  const location = useLocation();
+
   return (
     <nav className="bottom-nav">
       <section className="bottom-nav-container">
-        <a href="#" className="nav-item active">
+        <Link
+          to="/"
+          className={`nav-item ${location.pathname === "/" ? "active" : ""}`}
+        >
           <AiFillHome />
           <span className="nav-label">Home</span>
-        </a>
-        <a href="#" className="nav-item">
+        </Link>
+        <Link
+          to="/cart"
+          className={`nav-item ${
+            location.pathname === "/cart" ? "active" : ""
+          }`}
+        >
           <AiOutlineShoppingCart />
           <span className="nav-label">Cart</span>
-        </a>
-        <a href="#" className="nav-item">
+        </Link>
+        <Link
+          to="/products"
+          className={`nav-item ${
+            location.pathname === "/products" ? "active" : ""
+          }`}
+        >
           <FaProductHunt />
           <span className="nav-label">Products</span>
-        </a>
-        <a href="#" className="nav-item">
+        </Link>
+        <Link
+          to="/wishlist"
+          className={`nav-item ${
+            location.pathname === "/wishlist" ? "active" : ""
+          }`}
+        >
           <TbJewishStarFilled />
           <span className="nav-label">Wishlist</span>
-        </a>
+        </Link>
       </section>
     </nav>
   );

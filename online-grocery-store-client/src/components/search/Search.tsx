@@ -1,14 +1,24 @@
 import { FaSearch } from "react-icons/fa";
 import "./Search.css";
 
-const Search = () => {
+interface SearchProps {
+  handleSearch: (searchTerm: string) => void;
+}
+
+const Search = ({ handleSearch }: SearchProps) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleSearch(event.target.value);
+  };
+
   return (
-    <form className="search ">
-      <input type="text" placeholder="Search" />
-      <button type="submit">
-        <FaSearch />
-      </button>
-    </form>
+    <div className="search-container">
+      <section className="search ">
+        <input type="text" placeholder="Search" onChange={handleInputChange} />
+        <button type="submit">
+          <FaSearch />
+        </button>
+      </section>
+    </div>
   );
 };
 

@@ -1,21 +1,45 @@
 .category {
-  width: 200px;
-  height: 300px;
+  text-align: end;
+  width: 100%;
+}
+
+.showmore-btn {
+  margin-bottom: 10px;
+  border: none;
+  font-size: 16px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.category-container {
+  width: 175px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   border: 3px solid #3c7c98;
   border-radius: 20px;
+  padding: 10px;
 }
 
 .category-image {
-  width: 150px;
-  height: 200px;
-  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 5px;
 }
 
-.carousel-container {
-  max-width: 1024px;
-  width: 100%;
+.category-name {
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
 }

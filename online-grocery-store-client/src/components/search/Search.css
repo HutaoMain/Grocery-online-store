@@ -1,7 +1,18 @@
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 5%;
+  margin-top: 2%;
+}
+
 .search {
   display: flex;
+  width: 50%;
   border-bottom: 3px solid #3c7c98;
   align-items: center;
+  justify-content: center;
   transition: all 0.2s ease-in-out;
 }
 
@@ -11,7 +22,11 @@
   padding: 8px;
   font-size: 16px;
   transition: all 0.2s ease-in-out;
-  width: 240px;
+  width: 100%;
+}
+
+.search input:focus {
+  outline: none;
 }
 
 .search button {
