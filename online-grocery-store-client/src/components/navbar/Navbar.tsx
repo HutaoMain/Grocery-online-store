@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { AiFillHome, AiOutlineShoppingCart } from "react-icons/ai";
 import { FaProductHunt } from "react-icons/fa";
 import { TbJewishStarFilled } from "react-icons/tb";
+import ProfileMenu from "../profile-dropdown/ProfileMenu";
 
 const Navbar = () => {
   const location = useLocation();
@@ -44,6 +45,9 @@ const Navbar = () => {
           <TbJewishStarFilled />
           <span className="nav-label">Wishlist</span>
         </Link>
+        <div className="nav-item">
+          <ProfileMenu />
+        </div>
       </section>
     </nav>
   );

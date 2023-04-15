@@ -56,9 +56,16 @@ const Category = () => {
 
   return (
     <div className="category">
-      <Link to="/categories">
-        <button className="showmore-btn">Show More</button>
-      </Link>
+      <h1>Shop by Category</h1>
+      <span>
+        Just click on your desired category or click <b>Show More</b> to start
+        your shopping.
+      </span>
+      <section className="show-more-container">
+        <Link to="/categories">
+          <button className="showmore-btn">Show More</button>
+        </Link>
+      </section>
       <div className="categories">
         {visibleCategories.map((category) => (
           <div className="category-container" key={category.name}>

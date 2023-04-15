@@ -1,6 +1,12 @@
 .category {
-  text-align: end;
   width: 100%;
+  max-width: 1240px;
+  margin-top: 20px;
+  margin-bottom: 10%;
+}
+
+.show-more-container {
+  text-align: end;
 }
 
 .showmore-btn {

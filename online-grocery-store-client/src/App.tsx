@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Topbar />
-      <ProfileMenu />
+
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
