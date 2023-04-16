@@ -13,7 +13,7 @@ interface products {
 const ProductCard = ({ image, name, price, quantity }: products) => {
   return (
     <div className="product-card">
-      <section style={{ textAlign: "end", color: "#A1A1A1" }}>
+      <section className="product-heart-fav">
         <AiFillHeart />
       </section>
       <section>
@@ -31,13 +31,24 @@ const ProductCard = ({ image, name, price, quantity }: products) => {
           </div>
         </section>
         <section className="product-btns">
-          <div>
-            <CgRemoveR style={{ cursor: "pointer" }} />
-            <span className="product-quantity-type">10</span>
-            <BiAddToQueue style={{ cursor: "pointer" }} />
+          <div className="product-quantity-btn">
+            <CgRemoveR style={{ cursor: "pointer", fontSize: "20px" }} />
+            {/* <span style={{ fontSize: "20px" }}>10</span> */}
+            <input
+              type="number"
+              className="product-amount"
+              // value={quantity}
+              // onChange={(e) => {
+              //   const value = parseInt(e.target.value);
+              //   setQuantity(value);
+              // }}
+              min="1"
+              // max={product.quantity}
+            />
+            <BiAddToQueue style={{ cursor: "pointer", fontSize: "20px" }} />
           </div>
           <div>
-            <AiOutlineShoppingCart />
+            <AiOutlineShoppingCart style={{ fontSize: "20px" }} />
           </div>
         </section>
       </section>
