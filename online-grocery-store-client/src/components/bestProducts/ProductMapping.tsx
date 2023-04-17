@@ -3,6 +3,7 @@ import ProductCard from "../productCard/ProductCard";
 const ProductMapping = () => {
   const arrayOfObjects = [
     {
+      id: 1,
       image:
         "https://d2t3trus7wwxyy.cloudfront.net/catalog/product/p/r/pringles-original-107g_2.jpg",
       name: "Pringles",
@@ -10,6 +11,7 @@ const ProductMapping = () => {
       quantity: 30,
     },
     {
+      id: 2,
       image:
         "https://ipcdn.freshop.com/resize?url=https://images.freshop.com/1564405684702535921/26ca2bc40af330102e756dfeb42b8298_large.png&width=512&type=webp&quality=90",
       name: "Nova",
@@ -17,6 +19,7 @@ const ProductMapping = () => {
       quantity: 40,
     },
     {
+      id: 3,
       image:
         "https://cdn.shopify.com/s/files/1/0705/9226/6549/products/IMG_14022022_084424__8_x_8_inch_1200x1200.jpg?v=1676782767",
       name: "Piatos",
@@ -24,6 +27,7 @@ const ProductMapping = () => {
       quantity: 40,
     },
     {
+      id: 5,
       image:
         "https://www.selectaphilippines.com/content/dam/unilever/heart/philippines/pack_shot/frootie_strawberry_packshot-31957509-png.png",
       name: "Strawberry ",
@@ -58,10 +62,13 @@ const ProductMapping = () => {
       >
         {arrayOfObjects.map((product) => (
           <ProductCard
+            key={product.id}
+            id={product.id}
             image={product.image}
             name={product.name}
             price={product.price}
             quantity={product.quantity}
+            product={product}
           />
         ))}
       </div>

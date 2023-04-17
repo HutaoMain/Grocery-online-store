@@ -2,15 +2,22 @@ import { CgRemoveR } from "react-icons/cg";
 import { BiAddToQueue } from "react-icons/bi";
 import { AiFillHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import "./ProductCard.css";
+import { useCartStore } from "../../zustand/CartStore";
+import { useState } from "react";
 
 interface products {
+  id: number;
   image: string;
   name: string;
   price: number;
   quantity: number;
+  product: any;
 }
 
-const ProductCard = ({ image, name, price, quantity }: products) => {
+const ProductCard = ({ product, image, name, price, quantity }: products) => {
+  const [getQuantity, setQuantity] = useState<Number>();
+  const addItem = useCartStore((state) => state.addItem);
+
   return (
     <div className="product-card">
       <section className="product-heart-fav">
@@ -38,10 +45,10 @@ const ProductCard = ({ image, name, price, quantity }: products) => {
               type="number"
               className="product-amount"
               // value={quantity}
-              // onChange={(e) => {
-              //   const value = parseInt(e.target.value);
-              //   setQuantity(value);
-              // }}
+              onChange={(e) => {
+                const value = parseInt(e.target.value);
+                setQuantity(value);
+              }}
               defaultValue="1"
               min="1"
               // max={product.quantity}
@@ -49,7 +56,10 @@ const ProductCard = ({ image, name, price, quantity }: products) => {
             <BiAddToQueue style={{ cursor: "pointer", fontSize: "20px" }} />
           </div>
           <div>
-            <AiOutlineShoppingCart style={{ fontSize: "20px" }} />
+            <AiOutlineShoppingCart
+              onClick={() => addItem(product)}
+              style={{ fontSize: "20px", cursor: "pointer" }}
+            />
           </div>
         </section>
       </section>

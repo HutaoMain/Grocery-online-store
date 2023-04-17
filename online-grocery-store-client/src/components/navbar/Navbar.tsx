@@ -4,8 +4,12 @@ import { AiFillHome, AiOutlineShoppingCart } from "react-icons/ai";
 import { FaProductHunt } from "react-icons/fa";
 import { TbJewishStarFilled } from "react-icons/tb";
 import ProfileMenu from "../profile-dropdown/ProfileMenu";
+import Badge from "@mui/material/Badge";
+import { useCartStore } from "../../zustand/CartStore";
 
 const Navbar = () => {
+  const cart = useCartStore((state) => state.items);
+
   const location = useLocation();
 
   return (
@@ -19,12 +23,15 @@ const Navbar = () => {
           <span className="nav-label">Home</span>
         </Link>
         <Link
-          to="/cart"
+          to="/checkout"
           className={`nav-item ${
             location.pathname === "/cart" ? "active" : ""
           }`}
         >
-          <AiOutlineShoppingCart />
+          <Badge badgeContent={cart.length} color="primary">
+            <AiOutlineShoppingCart />
+          </Badge>
+
           <span className="nav-label">Cart</span>
         </Link>
         <Link
@@ -37,13 +44,13 @@ const Navbar = () => {
           <span className="nav-label">Products</span>
         </Link>
         <Link
-          to="/wishlist"
+          to="/favorite"
           className={`nav-item ${
-            location.pathname === "/wishlist" ? "active" : ""
+            location.pathname === "/favorite" ? "active" : ""
           }`}
         >
           <TbJewishStarFilled />
-          <span className="nav-label">Wishlist</span>
+          <span className="nav-label">Favorite</span>
         </Link>
         <div className="nav-item">
           <ProfileMenu />
