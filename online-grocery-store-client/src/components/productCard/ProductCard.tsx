@@ -42,6 +42,7 @@ const ProductCard = ({ image, name, price, quantity }: products) => {
               //   const value = parseInt(e.target.value);
               //   setQuantity(value);
               // }}
+              defaultValue="1"
               min="1"
               // max={product.quantity}
             />

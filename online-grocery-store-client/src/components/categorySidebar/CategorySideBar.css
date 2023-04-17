@@ -1,0 +1,41 @@
+.category-sidebar {
+  width: 300px;
+  border: 2px solid rgb(161, 161, 161, 0.5);
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+  flex-direction: column;
+
+  margin: 50px 0px;
+}
+
+.categorysidebar-division {
+  height: 3px;
+  width: 90%;
+  background-color: #89cb45;
+}
+
+.categoryside-container {
+  height: 50px;
+  width: 200px;
+  border: 2px solid rgb(161, 161, 161, 0.5);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.categoryside-image {
+  height: 20px;
+  width: auto;
+}
+
+.categoryside-prodno {
+  color: gray;
+  padding: 20px;
+  border-radius: 50%;
+}

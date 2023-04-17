@@ -5,6 +5,8 @@ import ProfileMenu from "./components/profile-dropdown/ProfileMenu";
 import Topbar from "./components/topbar/Topbar";
 import { Routes, Route } from "react-router-dom";
 import CategoryPage from "./pages/categorypage/CategoryPage";
+import Footer from "./components/footer/Footer";
+import ProductPage from "./pages/productpage/ProductPage";
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/categories" element={<CategoryPage />} />
+        <Route path="/products" element={<ProductPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
