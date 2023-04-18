@@ -15,7 +15,7 @@ interface products {
 }
 
 const ProductCard = ({ product, image, name, price, quantity }: products) => {
-  const [getQuantity, setQuantity] = useState<Number>();
+  const [getQuantity, setQuantity] = useState<number>(1);
   const addItem = useCartStore((state) => state.addItem);
 
   return (
@@ -44,12 +44,11 @@ const ProductCard = ({ product, image, name, price, quantity }: products) => {
             <input
               type="number"
               className="product-amount"
-              // value={quantity}
+              value={getQuantity}
               onChange={(e) => {
                 const value = parseInt(e.target.value);
                 setQuantity(value);
               }}
-              defaultValue="1"
               min="1"
               // max={product.quantity}
             />
@@ -57,7 +56,7 @@ const ProductCard = ({ product, image, name, price, quantity }: products) => {
           </div>
           <div>
             <AiOutlineShoppingCart
-              onClick={() => addItem(product)}
+              onClick={() => addItem(product, getQuantity)}
               style={{ fontSize: "20px", cursor: "pointer" }}
             />
           </div>
