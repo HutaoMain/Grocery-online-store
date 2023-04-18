@@ -1,6 +1,7 @@
 import "./ProfileMenu.css";
 import { useState } from "react";
 import images from "../../assets/images.jpg";
+import { Link } from "react-router-dom";
 
 const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,9 @@ const ProfileMenu = () => {
             />
             <p>Christine Joy Aliser</p>
           </div>
-          <button className="profile-menu-btn">See Profile</button>
+          <Link to="/profile">
+            <button className="profile-menu-btn">See Profile</button>
+          </Link>
           <button className="profile-menu-btn">Wish list</button>
           <div className="logout-container">
             <button className="btnLogout">Logout</button>

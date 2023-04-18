@@ -1,0 +1,49 @@
+.profilepage {
+  width: 100%;
+}
+
+.profilepage-container {
+  max-width: 1240px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.profilepage-header {
+}
+
+.profilepage-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profilepage-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: start;
+}
+
+.profilepage-body {
+}
+
+.profilepage-btns {
+  margin-top: 20px;
+}
+
+.profilepage-btn-list {
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid transparent;
+  font-size: 18px;
+  width: 300px;
+}
+
+.profilepage-btn-list:focus {
+  border-bottom: 2px solid #89cb45;
+}
