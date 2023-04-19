@@ -5,7 +5,7 @@ const ProfilePage = () => {
   return (
     <div className="profilepage">
       <div className="profilepage-container">
-        <section className="profilepage-header">
+        <section className="profilepage-sidebar">
           <div>
             <img className="profilepage-image" src={profilepic} />
           </div>
