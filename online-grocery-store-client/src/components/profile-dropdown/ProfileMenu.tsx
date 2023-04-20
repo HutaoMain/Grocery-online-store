@@ -26,7 +26,6 @@ const ProfileMenu = () => {
           <Link to="/profile">
             <button className="profile-menu-btn">See Profile</button>
           </Link>
-          <button className="profile-menu-btn">Wish list</button>
           <div className="logout-container">
             <button className="btnLogout">Logout</button>
           </div>
