@@ -1,0 +1,86 @@
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-nav-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 10px;
+  width: 70%;
+  padding: 20px 10px;
+  background-color: #fff;
+  box-shadow: 0 -2px 4px rgb(31, 30, 44);
+  z-index: 999;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #999;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  flex-basis: 20%;
+}
+
+.nav-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.active {
+  color: #000;
+}
+
+.nav-loginbtn {
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 16px;
+  background-color: #89cb45;
+  color: #ffff;
+  cursor: pointer;
+}
+
+.nav-loginbtn:hover {
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: 1px solid #89cb45;
+  font-size: 16px;
+  background-color: #ffff;
+  color: black;
+  cursor: pointer;
+}
+
+.nav-login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 576px) {
+  .bottom-nav-container {
+    bottom: 5%;
+  }
+
+  .nav-item {
+    flex-basis: auto;
+    text-align: center;
+  }
+
+  .nav-label {
+    display: none;
+  }
+}
