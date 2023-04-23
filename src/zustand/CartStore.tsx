@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import axios from "axios";
 
 interface CartItem {
   id: string;
@@ -26,11 +27,24 @@ export const useCartStore = create<CartStore>(
     (set) => ({
       items: [],
       total: 0,
-      addItem: (item: CartItem, quantity: number = 1) => {
+      addItem: async (item: CartItem, quantity: number = 1) => {
+        const response = await axios.get(
+          `${import.meta.env.VITE_APP_API_URL}/api/product/specificProduct/${
+            item.id
+          }`
+        );
+        const availableQuantity = response.data.quantity;
+
+        if (quantity > availableQuantity) {
+          alert(`Only ${availableQuantity} items are available`);
+          return;
+        }
+
         set((state: any) => {
           const index = state.items.findIndex(
             (i: CartItem) => i.id === item.id
           );
+
           if (index === -1) {
             // Item not in cart yet, add it as a new item
             return {

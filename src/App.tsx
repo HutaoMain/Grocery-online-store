@@ -11,6 +11,7 @@ import ProfilePage from "./pages/profilepage/ProfilePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useAuthStore from "./zustand/AuthStore";
 import { useEffect } from "react";
+import FavoritePage from "./pages/favoritePage/FavoritePage";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ function App() {
           <Route path="/products" element={<ProductPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/favorite" element={<FavoritePage />} />
         </Routes>
         <Footer />
       </div>

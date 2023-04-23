@@ -1,17 +1,47 @@
 import { CgRemoveR } from "react-icons/cg";
 import { BiAddToQueue } from "react-icons/bi";
-import { AiFillHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiFillHeart,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 import "./ProductCard.css";
 import { useCartStore } from "../../zustand/CartStore";
 import React, { useState } from "react";
 import { ProductInterface } from "../../types/Types";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import useAuthStore from "../../zustand/AuthStore";
 
 interface Props {
   product: ProductInterface;
 }
 
 const ProductCard: React.FC<Props> = ({ product }) => {
+  const user = useAuthStore((state) => state.user);
+  const addItem = useCartStore((state) => state.addItem);
+
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
+
+  const { data } = useQuery<boolean>(
+    ["isFavorite", user, product.id],
+    async () => {
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_API_URL}/api/favorite/isFavorite/${user}/${
+          product.id
+        }`
+      );
+      return response.data;
+    },
+    {
+      onSuccess: (favorite) => {
+        setIsFavorite(favorite);
+      },
+    }
+  );
+
+  console.log("favorite", data);
 
   const handleQuantity = (type: string) => {
     if (type === "dec") {
@@ -25,12 +55,28 @@ const ProductCard: React.FC<Props> = ({ product }) => {
     }
   };
 
-  const addItem = useCartStore((state) => state.addItem);
+  const handleCheckAddFavorite = async () => {
+    if (!isFavorite) {
+      await axios.post(
+        `${import.meta.env.VITE_APP_API_URL}/api/favorite/create`,
+        {
+          productId: product.id,
+          email: user,
+        }
+      );
+      setIsFavorite(true);
+    } else {
+      await axios.delete(
+        `${import.meta.env.VITE_APP_API_URL}/api/favorite/delete/${product.id}`
+      );
+      setIsFavorite(false);
+    }
+  };
 
   return (
     <div className="product-card">
-      <section className="product-heart-fav">
-        <AiFillHeart />
+      <section className="product-heart-fav" onClick={handleCheckAddFavorite}>
+        {isFavorite ? <AiFillHeart color="red" /> : <AiOutlineHeart />}
       </section>
       <section>
         <img

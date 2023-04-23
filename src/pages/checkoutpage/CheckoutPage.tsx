@@ -53,12 +53,13 @@ const CheckoutPage = () => {
                 onClick={() => decreaseItem(item.id)}
                 style={{ cursor: "pointer", fontSize: "20px" }}
               />
-              <input
+              {/* <input
                 type="number"
                 className="product-amount"
                 value={item.quantity}
                 min="1"
-              />
+              /> */}
+              <span>{item.quantity}</span>
               <BiAddToQueue
                 onClick={() => increaseItem(item.id)}
                 style={{ cursor: "pointer", fontSize: "20px" }}

@@ -7,7 +7,7 @@ import { CategoryInterface } from "../../types/Types";
 const BestCategories = () => {
   // change to bestCategories
   const { data } = useQuery<CategoryInterface[]>({
-    queryKey: ["category"],
+    queryKey: ["bestCategory"],
     queryFn: () =>
       axios
         .get(`${import.meta.env.VITE_APP_API_URL}/api/category/list`)

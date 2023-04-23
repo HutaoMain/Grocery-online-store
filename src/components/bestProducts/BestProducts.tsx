@@ -5,7 +5,7 @@ import axios from "axios";
 
 const BestProducts = () => {
   const { data } = useQuery<ProductInterface[]>({
-    queryKey: ["product"],
+    queryKey: ["bestProducts"],
     queryFn: () =>
       axios
         .get(`${import.meta.env.VITE_APP_API_URL}/api/product/bestProducts`)

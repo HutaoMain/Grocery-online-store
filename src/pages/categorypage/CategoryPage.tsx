@@ -8,7 +8,7 @@ import { CategoryInterface } from "../../types/Types";
 
 const CategoryPage = () => {
   const { data } = useQuery<CategoryInterface[]>({
-    queryKey: ["category"],
+    queryKey: ["categoryList"],
     queryFn: () =>
       axios
         .get(`${import.meta.env.VITE_APP_API_URL}/api/category/list`)
