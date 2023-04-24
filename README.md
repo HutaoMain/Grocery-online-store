@@ -13,7 +13,9 @@ Features:
 
 Need to fix:
 
-1. responsiveness in ProductPage
+1. responsiveness
+2. Category in ProductPage
+3. if first time register or logging in, the backend should have boolean object 0 and 1, if 0 then first time logging in, it will ask then to fill up the shipping address if 1 then it will not ask and will redirect to home after logging in.
 
 ####################
 

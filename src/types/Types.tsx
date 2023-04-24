@@ -10,6 +10,12 @@ export interface UserInterface {
   name: string;
   imageUrl: string;
   userRole: string;
+  street: string;
+  barangay: string;
+  postalCode: number;
+  municipality: string;
+  city: string;
+  contactNumber: number;
 }
 
 export interface ProductInterface {
@@ -21,4 +27,14 @@ export interface ProductInterface {
   quantity: number;
   category: any;
   sold: number;
+}
+
+export interface shippingAdd {
+  street: string;
+  barangay: string;
+  postalCode: number;
+  municipality: string;
+  city: string;
+  contactNumber: number;
+  modeOfPayment: string;
 }

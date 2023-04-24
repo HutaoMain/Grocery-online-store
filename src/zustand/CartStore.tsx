@@ -27,52 +27,94 @@ export const useCartStore = create<CartStore>(
     (set) => ({
       items: [],
       total: 0,
+      // addItem: (item: CartItem, quantity: number = 1) => {
+      //   set((state: any) => {
+      //     const index = state.items.findIndex(
+      //       (i: CartItem) => i.id === item.id
+      //     );
+
+      //     if (index === -1) {
+      //       // Item not in cart yet, add it as a new item
+      //       return {
+      //         items: [...state.items, { ...item, quantity }],
+      //         total: state.total + item.price * quantity,
+      //       };
+      //     } else {
+      //       // Item already in cart, update its quantity
+      //       const newItems = [...state.items];
+      //       newItems[index].quantity += quantity;
+      //       return {
+      //         items: newItems,
+      //         total: state.total + item.price * quantity,
+      //       };
+      //     }
+      //   });
+      // },
       addItem: async (item: CartItem, quantity: number = 1) => {
-        const response = await axios.get(
-          `${import.meta.env.VITE_APP_API_URL}/api/product/specificProduct/${
-            item.id
-          }`
-        );
-        const availableQuantity = response.data.quantity;
-
-        if (quantity > availableQuantity) {
-          alert(`Only ${availableQuantity} items are available`);
-          return;
-        }
-
-        set((state: any) => {
-          const index = state.items.findIndex(
-            (i: CartItem) => i.id === item.id
+        try {
+          const { data } = await axios.get(
+            `${import.meta.env.VITE_APP_API_URL}/api/product/specificProduct/${
+              item.id
+            }`
           );
+          const productQuantity = data.quantity;
 
-          if (index === -1) {
-            // Item not in cart yet, add it as a new item
-            return {
-              items: [...state.items, { ...item, quantity }],
-              total: state.total + item.price * quantity,
-            };
-          } else {
-            // Item already in cart, update its quantity
-            const newItems = [...state.items];
-            newItems[index].quantity += quantity;
-            return {
-              items: newItems,
-              total: state.total + item.price * quantity,
-            };
-          }
-        });
+          set((state: any) => {
+            const index = state.items.findIndex(
+              (i: CartItem) => i.id === item.id
+            );
+
+            if (index === -1) {
+              // Item not in cart yet, add it as a new item
+              if (quantity > productQuantity) {
+                quantity = productQuantity;
+              }
+              return {
+                items: [...state.items, { ...item, quantity }],
+                total: state.total + item.price * quantity,
+              };
+            } else {
+              // Item already in cart, update its quantity
+              const newQuantity = state.items[index].quantity + quantity;
+              if (newQuantity > productQuantity) {
+                quantity = productQuantity - state.items[index].quantity;
+              }
+              const newItems = [...state.items];
+              newItems[index].quantity += quantity;
+              return {
+                items: newItems,
+                total: state.total + item.price * quantity,
+              };
+            }
+          });
+        } catch (error) {
+          console.error(error);
+        }
       },
+
       // increasing the product
       // increasing the product
-      increaseItem: (id: string) => {
+      increaseItem: async (id: string) => {
+        const { data } = await axios.get(
+          `${
+            import.meta.env.VITE_APP_API_URL
+          }/api/product/specificProduct/${id}`
+        );
+        const productQuantity = data.quantity;
         set((state: any) => {
           const item = state.items.find((item: any) => item.id === id)!;
-          return {
-            items: state.items.map((item: any) =>
-              item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-            ),
-            total: state.total + item.price,
-          };
+
+          if (productQuantity > item.quantity) {
+            return {
+              items: state.items.map((item: any) =>
+                item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+              ),
+              total: state.total + item.price,
+            };
+          } else {
+            alert("you can't add more item in the cart.");
+            return state;
+          }
         });
       },
       decreaseItem: (id: string) => {

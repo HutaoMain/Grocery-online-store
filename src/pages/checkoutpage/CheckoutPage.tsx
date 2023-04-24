@@ -2,13 +2,80 @@ import { useCartStore } from "../../zustand/CartStore";
 import { CgRemoveR } from "react-icons/cg";
 import { BiAddToQueue } from "react-icons/bi";
 import "./CheckoutPage.css";
+import useAuthStore from "../../zustand/AuthStore";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { UserInterface, shippingAdd } from "../../types/Types";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutPage = () => {
   const items = useCartStore((state) => state.items);
+  const user = useAuthStore((state) => state.user);
   const removeItem = useCartStore((state) => state.removeItem);
   const increaseItem = useCartStore((state) => state.increaseItem);
   const decreaseItem = useCartStore((state) => state.decreaseItem);
   const total = useCartStore((state) => state.total);
+
+  const navigate = useNavigate();
+
+  const { data } = useQuery<UserInterface>({
+    queryKey: ["favoriteByEmail"],
+    queryFn: () =>
+      axios
+        .get(`${import.meta.env.VITE_APP_API_URL}/api/user/${user}`)
+        .then((res) => res.data),
+  });
+
+  const [shippingAdd, setShippingAdd] = useState<shippingAdd>({
+    street: data?.street || "",
+    barangay: data?.barangay || "",
+    postalCode: data?.postalCode || 0,
+    municipality: data?.municipality || "",
+    city: data?.city || "",
+    contactNumber: data?.contactNumber || 0,
+    modeOfPayment: "Pickup",
+  });
+
+  const itemsToString = JSON.stringify(items);
+
+  // const handleUpdateAddress = async () => {
+  //   await axios.put(`${import.meta.env.VITE_APP_API_URL}/api/user/changeAddress/${user}`, {
+  //     address: shippingAddress.address,
+  //     city: shippingAddress.city,
+  //     postalCode: shippingAddress.postalCode,
+  //   });
+  // };
+
+  const handlePlaceOrder = async () => {
+    const orderData = {
+      email: user,
+      userFullName: data?.name,
+      totalPrice: total,
+      orderList: itemsToString,
+      status: "Pending",
+      street: shippingAdd.street,
+      barangay: shippingAdd.barangay,
+      postalCode: shippingAdd.postalCode,
+      municipality: shippingAdd.municipality,
+      city: shippingAdd.city,
+      contactNumber: shippingAdd.contactNumber,
+    };
+
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_APP_API_URL}/api/order/create`,
+        orderData
+      );
+      window.localStorage.removeItem("cart-storage");
+      // handleUpdateAddress();
+      toast.success("✅ Successfully Ordered!");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="checkout">
@@ -32,7 +99,7 @@ const CheckoutPage = () => {
           <span>TOTAL</span>
         </div>
         {items?.map((item) => (
-          <section className="checkout-product">
+          <section className="checkout-product" key={item.id}>
             <div className="checkout-image-name">
               <img
                 className="checkout-image"
@@ -87,24 +154,102 @@ const CheckoutPage = () => {
           <div className="checkout-ordersummary-container">
             <section className="checkout-ordersummary-left">
               <div className="checkout-ordersummary-itemlist">
-                <label>Fullname</label>
-                <input type="text" placeholder="fullname" />
-              </div>
-              <div className="checkout-ordersummary-itemlist">
-                <label>Full Address</label>
-                <input type="text" placeholder="Full Address" />
+                <label>Street</label>
+                <input
+                  type="text"
+                  placeholder="Street"
+                  defaultValue={shippingAdd.street}
+                  onChange={(e) => {
+                    setShippingAdd((data) => ({
+                      ...data,
+                      street: e.target.value,
+                    }));
+                  }}
+                />
               </div>
               <div className="checkout-ordersummary-itemlist">
                 <label>Barangay</label>
-                <input type="text" placeholder="Barangay" />
+                <input
+                  type="text"
+                  placeholder="Barangay"
+                  defaultValue={shippingAdd.barangay}
+                  onChange={(e) => {
+                    setShippingAdd((data) => ({
+                      ...data,
+                      barangay: e.target.value,
+                    }));
+                  }}
+                />
+              </div>
+              <div className="checkout-ordersummary-itemlist">
+                <label>Municipality</label>
+                <input
+                  type="text"
+                  placeholder="Municipality"
+                  defaultValue={shippingAdd.municipality}
+                  onChange={(e) => {
+                    setShippingAdd((data) => ({
+                      ...data,
+                      municipality: e.target.value,
+                    }));
+                  }}
+                />
               </div>
               <div className="checkout-ordersummary-itemlist">
                 <label>City</label>
-                <input type="text" placeholder="City" />
+                <input
+                  type="text"
+                  placeholder="City"
+                  defaultValue={shippingAdd.city}
+                  onChange={(e) => {
+                    setShippingAdd((data) => ({
+                      ...data,
+                      city: e.target.value,
+                    }));
+                  }}
+                />
+              </div>
+              <div className="checkout-ordersummary-itemlist">
+                <label>Postal Code</label>
+                <input
+                  type="number"
+                  placeholder="Postal Code"
+                  className="checkout-postalcode"
+                  defaultValue={shippingAdd.postalCode}
+                  onChange={(e) => {
+                    setShippingAdd((data) => ({
+                      ...data,
+                      postalCode: parseInt(e.target.value),
+                    }));
+                  }}
+                />
+              </div>
+              <div className="checkout-ordersummary-itemlist">
+                <label>Contact Number</label>
+                <input
+                  type="number"
+                  placeholder="Contact Number"
+                  className="checkout-postalcode"
+                  defaultValue={shippingAdd.contactNumber}
+                  onChange={(e) => {
+                    setShippingAdd((data) => ({
+                      ...data,
+                      contactNumber: parseInt(e.target.value),
+                    }));
+                  }}
+                />
               </div>
               <div className="checkout-ordersummary-itemlist">
                 <label>Payment method</label>
-                <select className="checkout-payment-method">
+                <select
+                  className="checkout-payment-method"
+                  onChange={(e) => {
+                    setShippingAdd((data) => ({
+                      ...data,
+                      modeOfPayment: e.target.value,
+                    }));
+                  }}
+                >
                   <option value="pickup">Pickup</option>
                   <option value="cod">COD</option>
                   <option value="gcash">GCash</option>
@@ -121,7 +266,9 @@ const CheckoutPage = () => {
                 <h1>TOTAL</h1>
                 <h1>₱{total}</h1>
               </section>
-              <button className="checkout-btn">Checkout</button>
+              <button className="checkout-btn" onClick={handlePlaceOrder}>
+                Checkout
+              </button>
             </section>
           </div>
         </div>

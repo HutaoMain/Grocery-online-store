@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useAuthStore from "./zustand/AuthStore";
 import { useEffect } from "react";
 import FavoritePage from "./pages/favoritePage/FavoritePage";
+import { ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
+      <ToastContainer position="bottom-right" newestOnTop />
     </QueryClientProvider>
   );
 }
