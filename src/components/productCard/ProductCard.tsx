@@ -78,7 +78,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
       <section className="product-heart-fav" onClick={handleCheckAddFavorite}>
         {isFavorite ? <AiFillHeart color="red" /> : <AiOutlineHeart />}
       </section>
-      <section>
+      <section className="product-image-container">
         <img
           className="product-image"
           src={product.imageUrl}

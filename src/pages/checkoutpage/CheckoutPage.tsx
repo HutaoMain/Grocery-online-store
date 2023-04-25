@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { UserInterface, shippingAdd } from "../../types/Types";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const CheckoutPage = () => {
@@ -40,16 +40,12 @@ const CheckoutPage = () => {
 
   const itemsToString = JSON.stringify(items);
 
-  // const handleUpdateAddress = async () => {
-  //   await axios.put(`${import.meta.env.VITE_APP_API_URL}/api/user/changeAddress/${user}`, {
-  //     address: shippingAddress.address,
-  //     city: shippingAddress.city,
-  //     postalCode: shippingAddress.postalCode,
-  //   });
-  // };
-
   const handlePlaceOrder = async () => {
     const orderData = {
+      products: items.map((product) => ({
+        productId: product.id,
+        quantity: product.quantity,
+      })),
       email: user,
       userFullName: data?.name,
       totalPrice: total,
@@ -70,8 +66,18 @@ const CheckoutPage = () => {
       );
       window.localStorage.removeItem("cart-storage");
       // handleUpdateAddress();
-      toast.success("✅ Successfully Ordered!");
-      navigate("/");
+      toast("Successfully ordered!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -273,6 +279,7 @@ const CheckoutPage = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -16,5 +16,11 @@
   flex: 1;
 }
 
+.filtered-category-products {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 50px;
+}
+
 /* .productpage-list {
 } */

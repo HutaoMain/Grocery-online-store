@@ -5,7 +5,7 @@ import Category from "../category/Category";
 import { CategoryInterface } from "../../types/Types";
 
 const BestCategories = () => {
-  // change to bestCategories
+  // change to bestCategories api
   const { data } = useQuery<CategoryInterface[]>({
     queryKey: ["bestCategory"],
     queryFn: () =>

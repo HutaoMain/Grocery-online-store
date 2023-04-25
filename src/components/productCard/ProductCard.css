@@ -3,6 +3,7 @@
   flex-direction: column;
   border: 2px solid rgb(161, 161, 161, 0.5);
   border-radius: 10px;
+  width: 200px;
   padding: 20px;
   padding-bottom: 10px;
   position: relative;
@@ -15,6 +16,12 @@
   color: #a1a1a1;
   font-size: 25px;
   cursor: pointer;
+}
+
+.product-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product-image {

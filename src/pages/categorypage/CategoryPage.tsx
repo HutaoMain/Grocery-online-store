@@ -1,6 +1,6 @@
 import Search from "../../components/search/Search";
 import "./CategoryPage.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Category from "../../components/category/Category";
@@ -17,7 +17,13 @@ const CategoryPage = () => {
 
   const [filteredCategories, setFilteredCategories] = useState<
     CategoryInterface[]
-  >(data || []);
+  >([]);
+
+  useEffect(() => {
+    if (data) {
+      setFilteredCategories(data);
+    }
+  }, [data]);
 
   const handleSearch = (searchTerm: string) => {
     if (data) {

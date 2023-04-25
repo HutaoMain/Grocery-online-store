@@ -20,8 +20,6 @@ const FavoritePage = () => {
         .then((res) => res.data),
   });
 
-  console.log("favorite page", data);
-
   return (
     <div className="favoritepage">
       <div className="favoritepage-container">
