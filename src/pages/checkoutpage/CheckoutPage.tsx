@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { UserInterface, shippingAdd } from "../../types/Types";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const CheckoutPage = () => {
@@ -67,17 +67,18 @@ const CheckoutPage = () => {
       window.localStorage.removeItem("cart-storage");
       // handleUpdateAddress();
       toast("Successfully ordered!", {
-        position: "top-right",
+        type: "success",
+        position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
       });
       setTimeout(() => {
         navigate("/");
-      }, 3000);
+        window.location.reload();
+      }, 5000);
     } catch (error) {
       console.log(error);
     }
@@ -279,7 +280,6 @@ const CheckoutPage = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

@@ -19,11 +19,11 @@ Need to fix:
 4. delete product in the api
 
 5. click category, show the products under // done
-6. Bug in category initial state null
+6. Bug in category initial state null // done
 7. Profile page
 8. change footer
 9. Topbar change
-10. check checkout // done but check the notification
+10. check checkout // done
 11. remove socials in banner
 12. bug, first load in favorite //observe
 

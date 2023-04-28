@@ -23,7 +23,7 @@ const FavoritePage = () => {
   return (
     <div className="favoritepage">
       <div className="favoritepage-container">
-        {data?.length === 0 ? (
+        {data && data?.length === 0 ? (
           <p className="favoritepage-nofavorite-text">No favorite products.</p>
         ) : (
           data?.map((product) => (

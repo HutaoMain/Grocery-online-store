@@ -1,4 +1,5 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css"; // from react toastify
 import Home from "./pages/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import Topbar from "./components/topbar/Topbar";
@@ -12,6 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useAuthStore from "./zustand/AuthStore";
 import { useEffect } from "react";
 import FavoritePage from "./pages/favoritePage/FavoritePage";
+import { ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +46,7 @@ function App() {
           <Route path="/favorite" element={<FavoritePage />} />
         </Routes>
         <Footer />
+        <ToastContainer />
       </div>
     </QueryClientProvider>
   );

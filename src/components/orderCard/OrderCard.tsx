@@ -1,24 +1,24 @@
-import fruit from "../../assets/fruits.jpg";
+import { useQuery } from "@tanstack/react-query";
 import "./OrderCard.css";
-
-interface order {
-  image: string;
-  name: string;
-  description: string;
-  price: number;
-  quantity: number;
-}
+import { orderInterface } from "../../types/Types";
+import axios from "axios";
+import useAuthStore from "../../zustand/AuthStore";
+import { useEffect, useState } from "react";
 
 const OrderCard = () => {
-  const orderArray: order[] = [
-    {
-      image: fruit,
-      name: "Fruit",
-      description: "best fruit",
-      price: 10,
-      quantity: 10,
-    },
-  ];
+  const user = useAuthStore((state) => state.user);
+
+  const [orderListJson, setOrderListJson] = useState();
+
+  const { data } = useQuery<orderInterface[]>({
+    queryKey: ["findOrderByUserMail"],
+    queryFn: () =>
+      axios
+        .get(`${import.meta.env.VITE_APP_API_URL}/api/order/userEmail/${user}`)
+        .then((res) => res.data),
+  });
+
+  console.log("orderListJson:", data);
 
   return (
     <div className="ordercard">
@@ -27,8 +27,8 @@ const OrderCard = () => {
         <span>date and time</span>
       </div>
       <div>
-        {orderArray.map((item) => (
-          <div className="ordercard-item-container">
+        {data?.map((item) => (
+          <div className="ordercard-item-container" key={item.id}>
             <section>
               <img
                 className="ordercard-image"
@@ -55,7 +55,7 @@ const OrderCard = () => {
           </div>
         ))}
         <hr />
-        <div>X {orderArray.length}</div>
+        <div>X {data?.length}</div>
         <div>X Complete</div>
       </div>
     </div>

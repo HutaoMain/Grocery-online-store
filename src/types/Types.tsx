@@ -38,3 +38,13 @@ export interface shippingAdd {
   contactNumber: number;
   modeOfPayment: string;
 }
+
+export interface orderInterface {
+  id: string;
+  image: string;
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  orderList: [];
+}

@@ -18,7 +18,7 @@
   max-width: 1240px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  align-items: center;
   flex-direction: column;
   margin-top: 20%;
   gap: 20px;
@@ -28,6 +28,7 @@
   box-shadow: 0 -2px 4px rgb(31, 30, 44);
   padding: 30px;
   background-color: #ffff;
+  width: 50%;
 }
 
 .profilepage-image {
@@ -35,18 +36,22 @@
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #888;
 }
 
 .profilepage-info {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  gap: 8px;
   text-align: start;
+  padding-left: 5%;
 }
 
 .profilepage-body {
   box-shadow: 0 -2px 4px rgb(31, 30, 44);
   background-color: #ffff;
+  width: 100%;
 }
 
 .profilepage-btns {
