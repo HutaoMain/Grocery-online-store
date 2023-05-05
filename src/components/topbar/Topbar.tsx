@@ -2,9 +2,9 @@ import "./Topbar.css";
 import { MdEmail } from "react-icons/md";
 import {
   BsFillTelephoneFill,
-  BsFacebook,
-  BsWechat,
-  BsInstagram,
+  // BsFacebook,
+  // BsWechat,
+  // BsInstagram,
 } from "react-icons/bs";
 
 const Topbar = () => {

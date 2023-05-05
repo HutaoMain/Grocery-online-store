@@ -6,9 +6,18 @@ import useAuthStore from "../../zustand/AuthStore";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { UserInterface, shippingAdd } from "../../types/Types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+
+interface Errors {
+  street: string;
+  barangay: string;
+  postalCode: string;
+  municipality: string;
+  city: string;
+  contactNumber: string;
+}
 
 const CheckoutPage = () => {
   const items = useCartStore((state) => state.items);
@@ -38,7 +47,48 @@ const CheckoutPage = () => {
     modeOfPayment: "Pickup",
   });
 
+  const [error, setError] = useState<Errors>();
+
   const itemsToString = JSON.stringify(items);
+
+  useEffect(() => {
+    const newErrors: Errors = {
+      street: "",
+      barangay: "",
+      city: "",
+      contactNumber: "",
+      municipality: "",
+      postalCode: "",
+    };
+
+    if (shippingAdd.street === "") {
+      newErrors.street = "Please enter your street";
+    }
+
+    if (shippingAdd.barangay === "") {
+      newErrors.barangay = "Please enter your barangay";
+    }
+
+    if (shippingAdd.city === "") {
+      newErrors.city = "Please enter your city";
+    }
+
+    if (shippingAdd.contactNumber === 0) {
+      newErrors.contactNumber = "Please enter your contact number";
+    }
+
+    if (shippingAdd.municipality === "") {
+      newErrors.municipality = "Please enter your municipality";
+    }
+
+    if (shippingAdd.postalCode === 0) {
+      newErrors.postalCode = "Please enter your postal code";
+    }
+
+    setError(newErrors);
+  }, [shippingAdd]);
+
+  console.log("log error usestate", error);
 
   const handlePlaceOrder = async () => {
     const orderData = {
@@ -173,6 +223,9 @@ const CheckoutPage = () => {
                     }));
                   }}
                 />
+                {shippingAdd.street === "" ? (
+                  <span style={{ color: "red" }}>{error?.street}</span>
+                ) : null}
               </div>
               <div className="checkout-ordersummary-itemlist">
                 <label>Barangay</label>
@@ -187,6 +240,9 @@ const CheckoutPage = () => {
                     }));
                   }}
                 />
+                {shippingAdd.barangay === "" ? (
+                  <span style={{ color: "red" }}>{error?.barangay}</span>
+                ) : null}
               </div>
               <div className="checkout-ordersummary-itemlist">
                 <label>Municipality</label>
@@ -201,6 +257,9 @@ const CheckoutPage = () => {
                     }));
                   }}
                 />
+                {shippingAdd.municipality === "" ? (
+                  <span style={{ color: "red" }}>{error?.municipality}</span>
+                ) : null}
               </div>
               <div className="checkout-ordersummary-itemlist">
                 <label>City</label>
@@ -215,6 +274,9 @@ const CheckoutPage = () => {
                     }));
                   }}
                 />
+                {shippingAdd.city === "" ? (
+                  <span style={{ color: "red" }}>{error?.city}</span>
+                ) : null}
               </div>
               <div className="checkout-ordersummary-itemlist">
                 <label>Postal Code</label>
@@ -230,6 +292,9 @@ const CheckoutPage = () => {
                     }));
                   }}
                 />
+                {shippingAdd.postalCode === 0 ? (
+                  <span style={{ color: "red" }}>{error?.postalCode}</span>
+                ) : null}
               </div>
               <div className="checkout-ordersummary-itemlist">
                 <label>Contact Number</label>
@@ -245,6 +310,9 @@ const CheckoutPage = () => {
                     }));
                   }}
                 />
+                {shippingAdd.contactNumber === 0 ? (
+                  <span style={{ color: "red" }}>{error?.contactNumber}</span>
+                ) : null}
               </div>
               <div className="checkout-ordersummary-itemlist">
                 <label>Payment method</label>
@@ -273,7 +341,19 @@ const CheckoutPage = () => {
                 <h1>TOTAL</h1>
                 <h1>₱{total}</h1>
               </section>
-              <button className="checkout-btn" onClick={handlePlaceOrder}>
+              <button
+                disabled={
+                  total === 0 ||
+                  !!error?.street ||
+                  !!error?.barangay ||
+                  !!error?.city ||
+                  !!error?.contactNumber ||
+                  !!error?.municipality ||
+                  !!error?.postalCode
+                }
+                className="checkout-btn"
+                onClick={handlePlaceOrder}
+              >
                 Checkout
               </button>
             </section>

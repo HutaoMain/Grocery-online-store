@@ -95,6 +95,18 @@
   cursor: pointer;
 }
 
+.checkout-btn:disabled {
+  background-color: gray;
+  color: #ffff;
+  font-size: 20px;
+  width: 300px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: not-allowed;
+}
+
 .checkout-ordersummary-right {
   text-align: start;
   width: 40%;
