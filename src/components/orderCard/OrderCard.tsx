@@ -1,17 +1,39 @@
 import { useEffect, useState } from "react";
 import "./OrderCard.css";
 import { orderInterface, orderListInterface } from "../../types/Types";
+import Modal from "react-modal";
+import UploadReceipt from "../uploadReceipt/UploadReceipt";
 
 interface IOrderData {
   orderData: orderInterface;
 }
 
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    borderRadius: "30px",
+    padding: "50px",
+  },
+};
+
+Modal.setAppElement("#root");
+
 const OrderCard = ({ orderData }: IOrderData) => {
   const [orderListJson, setOrderListJson] = useState<orderListInterface[]>();
+  const [openUploadReceipt, setOpenUploadReceipt] = useState<boolean>(false);
 
   useEffect(() => {
     setOrderListJson(JSON.parse(orderData.orderList));
   }, [orderData]);
+
+  const toggleOpenUploadReceipt = () => {
+    setOpenUploadReceipt(!openUploadReceipt);
+  };
 
   console.log(orderListJson);
   return (
@@ -33,7 +55,37 @@ const OrderCard = ({ orderData }: IOrderData) => {
           </div>
         ))}
       </section>
-      <span>Total price: ₱{orderData.totalPrice}</span>
+      <div
+        style={{
+          padding: "10px 0",
+          display: "flex",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+        }}
+      >
+        <span>Total price: ₱{orderData.totalPrice}</span>
+        {orderData.paymentMethod === "gcash" &&
+        orderData.status === "Pending" &&
+        orderData.receipt === null ? (
+          <button
+            className="ordercard-uploadbtn"
+            onClick={toggleOpenUploadReceipt}
+          >
+            Upload Receipt
+          </button>
+        ) : null}
+      </div>
+      <Modal
+        isOpen={openUploadReceipt}
+        onRequestClose={toggleOpenUploadReceipt}
+        style={customStyles}
+        contentLabel="Login Modal"
+      >
+        <UploadReceipt
+          orderData={orderData}
+          toggleOpenUploadReceipt={toggleOpenUploadReceipt}
+        />
+      </Modal>
     </div>
   );
 };

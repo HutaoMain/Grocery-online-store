@@ -24,3 +24,13 @@
   width: 200px;
   height: auto;
 }
+
+.ordercard-uploadbtn {
+  border: none;
+  background-color: #89cb45;
+  color: #ffff;
+  padding: 5px 10px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+}

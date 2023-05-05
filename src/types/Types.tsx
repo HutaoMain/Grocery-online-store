@@ -46,6 +46,8 @@ export interface orderInterface {
   totalPrice: number;
   orderList: string;
   status: string;
+  paymentMethod: string;
+  receipt: string;
 }
 
 export interface orderListInterface {
