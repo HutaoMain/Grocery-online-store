@@ -1,35 +1,26 @@
 .ordercard {
-  width: 90%;
-  height: 90%;
-  padding: 20px;
-  border: 2px solid rgb(161, 161, 161, 0.5);
-  margin-top: 20px;
+  width: 100%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  background-color: #ffff;
 }
 
-.ordercard-number-container {
-  text-align: left;
-}
-
-.ordercard-image {
-  height: 100px;
-  width: auto;
-}
-
-.ordercard-item-container {
-  display: flex;
+.ordercard-container {
+  width: 550px;
+  height: 250px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  justify-content: center;
-  gap: 100px;
+  padding-left: 30px;
 }
 
-.ordercard-item-info {
+.ordercard-info-container {
   display: flex;
-  text-align: left;
+  align-items: start;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
-.ordercard-quantity-price-container {
-  display: flex;
-  gap: 50px;
+.orderlist-image {
+  width: 200px;
+  height: auto;
 }

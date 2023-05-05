@@ -41,10 +41,19 @@ export interface shippingAdd {
 
 export interface orderInterface {
   id: string;
-  image: string;
-  name: string;
+  email: string;
+  userFullName: string;
+  totalPrice: number;
+  orderList: string;
+  status: string;
+}
+
+export interface orderListInterface {
+  id: string;
+  imageUrl: string;
   description: string;
   price: number;
+  productName: string;
   quantity: number;
-  orderList: [];
+  sold: number;
 }

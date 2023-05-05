@@ -27,6 +27,6 @@ Need to fix:
 11. remove socials in banner
 12. bug, first load in favorite //observe
 
-13. need to have validation in checkout (disable the checkout button if the fields are empty)
+13. need to have validation in checkout (disable the checkout button if the fields are empty) //should be filled up when the user checkout for the second time
 
 ####################

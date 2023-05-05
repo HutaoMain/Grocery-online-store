@@ -1,0 +1,33 @@
+.profileheader-container {
+  max-width: 1240px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20%;
+  gap: 20px;
+}
+
+.profileheader {
+  box-shadow: 0 -2px 4px rgb(31, 30, 44);
+  padding: 30px;
+  background-color: #ffff;
+  width: 50%;
+}
+
+.profileheader-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #888;
+}
+
+.profileheader-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  text-align: start;
+  padding-left: 5%;
+}
