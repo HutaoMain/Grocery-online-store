@@ -136,3 +136,8 @@
 .checkout-postalcode::-webkit-inner-spin-button {
   appearance: none;
 }
+
+.checkout-notice {
+  max-width: 350px;
+  word-wrap: break-word;
+}

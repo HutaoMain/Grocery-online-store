@@ -330,6 +330,12 @@ const CheckoutPage = () => {
                   <option value="gcash">GCash</option>
                 </select>
               </div>
+              {shippingAdd.modeOfPayment === "gcash" ? (
+                <span className="checkout-notice">
+                  Send the payment to this number: +69300362282. Then upload the
+                  receipt in the purchase history under profile.
+                </span>
+              ) : null}
             </section>
             <section className="checkout-ordersummary-right">
               <h2 style={{ marginTop: "0" }}>Order Details:</h2>
