@@ -42,17 +42,16 @@ const Footer = () => {
         </section>
         <section className="footer-right">
           <h3 className="footer-title">Contact</h3>
-          <div className="footer-contactitem">
-            <BsFillHouseDoorFill style={{ marginRight: "10px" }} /> 0220 OD,
-            Purok12 Brgy.San Agustin Trece Martires City, Cavite 4109
+          <div className="footer-contactitem" style={{ fontSize: "15px" }}>
+            <BsFillHouseDoorFill style={{ marginRight: "10px" }} /> Sec 8 Blk1
+            lot11 Belvedere III Pasong Kawayan II General Trias Cavite
           </div>
           <div className="footer-contactitem">
-            <BsFillTelephoneFill style={{ marginRight: "10px" }} />{" "}
-            +612345678910
+            <BsFillTelephoneFill style={{ marginRight: "10px" }} /> +69300362282
           </div>
           <div className="footer-contactitem">
-            <BsMailbox style={{ marginRight: "10px" }} />{" "}
-            christinejoyalicer@gmail.com
+            <BsMailbox style={{ marginRight: "10px" }} /> elisa.mortel@gmail.com
+            {/* christinejoyalicer@gmail.com */}
           </div>
         </section>
       </div>

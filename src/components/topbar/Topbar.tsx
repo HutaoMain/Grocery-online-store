@@ -13,15 +13,15 @@ const Topbar = () => {
       <div className="topbar-container">
         <span className="topbar-itemlist">
           <MdEmail />
-          christinejoyalicer@gmail.com |
-          <BsFillTelephoneFill /> +12345678910
+          elisa.mortel@gmail.com
+          <BsFillTelephoneFill /> +69300362282
         </span>
 
-        <span className="topbar-itemlist">
+        {/* <span className="topbar-itemlist">
           <BsFacebook />
           <BsWechat />
           <BsInstagram />
-        </span>
+        </span> */}
       </div>
     </div>
   );

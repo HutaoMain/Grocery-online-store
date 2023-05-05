@@ -21,7 +21,7 @@ const CheckoutPage = () => {
   const navigate = useNavigate();
 
   const { data } = useQuery<UserInterface>({
-    queryKey: ["favoriteByEmail"],
+    queryKey: ["checkOutByUser"],
     queryFn: () =>
       axios
         .get(`${import.meta.env.VITE_APP_API_URL}/api/user/${user}`)
