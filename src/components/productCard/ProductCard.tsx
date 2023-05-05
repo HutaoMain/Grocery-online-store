@@ -65,11 +65,13 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         }
       );
       setIsFavorite(true);
+      window.location.reload();
     } else {
       await axios.delete(
         `${import.meta.env.VITE_APP_API_URL}/api/favorite/delete/${product.id}`
       );
       setIsFavorite(false);
+      window.location.reload();
     }
   };
 

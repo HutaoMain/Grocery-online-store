@@ -41,7 +41,9 @@ const Navbar = ({ user }: any) => {
       <section className="bottom-nav-container">
         <Link
           to="/"
-          className={`nav-item ${location.pathname === "/" ? "active" : ""}`}
+          className={`nav-item ${
+            location.pathname === "/" ? "active-nav" : ""
+          }`}
         >
           <AiFillHome />
           <span className="nav-label">Home</span>
@@ -49,7 +51,7 @@ const Navbar = ({ user }: any) => {
         <Link
           to="/checkout"
           className={`nav-item ${
-            location.pathname === "/cart" ? "active" : ""
+            location.pathname === "/checkout" ? "active-nav" : ""
           }`}
         >
           <Badge badgeContent={cart.length} color="primary">
@@ -61,7 +63,7 @@ const Navbar = ({ user }: any) => {
         <Link
           to="/products"
           className={`nav-item ${
-            location.pathname === "/products" ? "active" : ""
+            location.pathname === "/products" ? "active-nav" : ""
           }`}
         >
           <FaProductHunt />
@@ -70,7 +72,7 @@ const Navbar = ({ user }: any) => {
         <Link
           to="/favorite"
           className={`nav-item ${
-            location.pathname === "/favorite" ? "active" : ""
+            location.pathname === "/favorite" ? "active-nav" : ""
           }`}
         >
           <TbJewishStarFilled />

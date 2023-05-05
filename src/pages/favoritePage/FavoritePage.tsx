@@ -4,9 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useAuthStore from "../../zustand/AuthStore";
 import ProductCard from "../../components/productCard/ProductCard";
+import { useEffect, useState } from "react";
 
 const FavoritePage = () => {
   const user = useAuthStore((state) => state.user);
+
+  const [favorite, setFavorite] = useState<ProductInterface[]>();
 
   const { data } = useQuery<ProductInterface[]>({
     queryKey: ["favoriteByEmail"],
@@ -20,13 +23,19 @@ const FavoritePage = () => {
         .then((res) => res.data),
   });
 
+  useEffect(() => {
+    setFavorite(data);
+  }, [data]);
+
+  console.log(favorite);
+
   return (
     <div className="favoritepage">
       <div className="favoritepage-container">
-        {data && data?.length === 0 ? (
+        {favorite === undefined || favorite?.length === 0 ? (
           <p className="favoritepage-nofavorite-text">No favorite products.</p>
         ) : (
-          data?.map((product) => (
+          favorite?.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         )}
