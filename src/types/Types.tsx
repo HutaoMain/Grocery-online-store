@@ -36,7 +36,7 @@ export interface shippingAdd {
   municipality: string;
   city: string;
   contactNumber: number;
-  modeOfPayment: string;
+  paymentMethod: string;
 }
 
 export interface orderInterface {

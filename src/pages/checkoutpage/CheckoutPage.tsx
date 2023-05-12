@@ -44,7 +44,7 @@ const CheckoutPage = () => {
     municipality: data?.municipality || "",
     city: data?.city || "",
     contactNumber: data?.contactNumber || 0,
-    modeOfPayment: "Pickup",
+    paymentMethod: "Pickup",
   });
 
   const [error, setError] = useState<Errors>();
@@ -88,7 +88,7 @@ const CheckoutPage = () => {
     setError(newErrors);
   }, [shippingAdd]);
 
-  console.log("log error usestate", error);
+  console.log("log error usestate", shippingAdd.paymentMethod);
 
   const handlePlaceOrder = async () => {
     const orderData = {
@@ -107,6 +107,7 @@ const CheckoutPage = () => {
       municipality: shippingAdd.municipality,
       city: shippingAdd.city,
       contactNumber: shippingAdd.contactNumber,
+      paymentMethod: shippingAdd.paymentMethod,
     };
 
     try {
@@ -321,7 +322,7 @@ const CheckoutPage = () => {
                   onChange={(e) => {
                     setShippingAdd((data) => ({
                       ...data,
-                      modeOfPayment: e.target.value,
+                      paymentMethod: e.target.value,
                     }));
                   }}
                 >
@@ -330,7 +331,7 @@ const CheckoutPage = () => {
                   <option value="gcash">GCash</option>
                 </select>
               </div>
-              {shippingAdd.modeOfPayment === "gcash" ? (
+              {shippingAdd.paymentMethod === "gcash" ? (
                 <span className="checkout-notice">
                   Send the payment to this number: +69300362282. Then upload the
                   receipt in the purchase history under profile.

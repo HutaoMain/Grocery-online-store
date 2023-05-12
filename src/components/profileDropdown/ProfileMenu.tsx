@@ -10,6 +10,7 @@ const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const user = useAuthStore((state) => state.user);
+  const clearUser = useAuthStore((state) => state.clearUser);
 
   const { data } = useQuery<UserInterface>({
     queryKey: ["user"],
@@ -38,7 +39,9 @@ const ProfileMenu = () => {
             <button className="profile-menu-btn">See Profile</button>
           </Link>
           <div className="logout-container">
-            <button className="btnLogout">Logout</button>
+            <button className="btnLogout" onClick={clearUser}>
+              Logout
+            </button>
           </div>
         </div>
       )}
