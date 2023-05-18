@@ -12,10 +12,10 @@ export interface UserInterface {
   userRole: string;
   street: string;
   barangay: string;
-  postalCode: number;
+  postalCode: string;
   municipality: string;
   city: string;
-  contactNumber: number;
+  contactNumber: string;
 }
 
 export interface ProductInterface {
@@ -32,10 +32,10 @@ export interface ProductInterface {
 export interface shippingAdd {
   street: string;
   barangay: string;
-  postalCode: number;
+  postalCode: string;
   municipality: string;
   city: string;
-  contactNumber: number;
+  contactNumber: string;
   paymentMethod: string;
 }
 

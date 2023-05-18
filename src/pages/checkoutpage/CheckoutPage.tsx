@@ -40,10 +40,10 @@ const CheckoutPage = () => {
   const [shippingAdd, setShippingAdd] = useState<shippingAdd>({
     street: data?.street || "",
     barangay: data?.barangay || "",
-    postalCode: data?.postalCode || 0,
+    postalCode: data?.postalCode || "",
     municipality: data?.municipality || "",
     city: data?.city || "",
-    contactNumber: data?.contactNumber || 0,
+    contactNumber: data?.contactNumber || "",
     paymentMethod: "Pickup",
   });
 
@@ -73,7 +73,7 @@ const CheckoutPage = () => {
       newErrors.city = "Please enter your city";
     }
 
-    if (shippingAdd.contactNumber === 0) {
+    if (shippingAdd.contactNumber === "") {
       newErrors.contactNumber = "Please enter your contact number";
     }
 
@@ -81,11 +81,20 @@ const CheckoutPage = () => {
       newErrors.municipality = "Please enter your municipality";
     }
 
-    if (shippingAdd.postalCode === 0) {
+    if (shippingAdd.postalCode === "") {
       newErrors.postalCode = "Please enter your postal code";
     }
 
     setError(newErrors);
+    setShippingAdd({
+      street: data?.street || "",
+      barangay: data?.barangay || "",
+      postalCode: data?.postalCode || "",
+      municipality: data?.municipality || "",
+      city: data?.city || "",
+      contactNumber: data?.contactNumber || "",
+      paymentMethod: "Pickup",
+    });
   }, [shippingAdd]);
 
   console.log("log error usestate", shippingAdd.paymentMethod);
@@ -101,12 +110,6 @@ const CheckoutPage = () => {
       totalPrice: total,
       orderList: itemsToString,
       status: "Pending",
-      street: shippingAdd.street,
-      barangay: shippingAdd.barangay,
-      postalCode: shippingAdd.postalCode,
-      municipality: shippingAdd.municipality,
-      city: shippingAdd.city,
-      contactNumber: shippingAdd.contactNumber,
       paymentMethod: shippingAdd.paymentMethod,
     };
 
@@ -115,8 +118,21 @@ const CheckoutPage = () => {
         `${import.meta.env.VITE_APP_API_URL}/api/order/create`,
         orderData
       );
+      await axios.put(
+        `${
+          import.meta.env.VITE_APP_API_URL
+        }/api/user/changeShippingAddress/${user}`,
+        {
+          street: shippingAdd.street,
+          barangay: shippingAdd.barangay,
+          postalCode: shippingAdd.postalCode,
+          municipality: shippingAdd.municipality,
+          city: shippingAdd.city,
+          contactNumber: shippingAdd.contactNumber,
+        }
+      );
+
       window.localStorage.removeItem("cart-storage");
-      // handleUpdateAddress();
       toast("Successfully ordered!", {
         type: "success",
         position: "bottom-right",
@@ -289,11 +305,11 @@ const CheckoutPage = () => {
                   onChange={(e) => {
                     setShippingAdd((data) => ({
                       ...data,
-                      postalCode: parseInt(e.target.value),
+                      postalCode: e.target.value,
                     }));
                   }}
                 />
-                {shippingAdd.postalCode === 0 ? (
+                {shippingAdd.postalCode === "" ? (
                   <span style={{ color: "red" }}>{error?.postalCode}</span>
                 ) : null}
               </div>
@@ -307,11 +323,11 @@ const CheckoutPage = () => {
                   onChange={(e) => {
                     setShippingAdd((data) => ({
                       ...data,
-                      contactNumber: parseInt(e.target.value),
+                      contactNumber: e.target.value,
                     }));
                   }}
                 />
-                {shippingAdd.contactNumber === 0 ? (
+                {shippingAdd.contactNumber === "" ? (
                   <span style={{ color: "red" }}>{error?.contactNumber}</span>
                 ) : null}
               </div>
